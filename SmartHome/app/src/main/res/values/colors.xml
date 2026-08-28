@@ -2,4 +2,33 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand Accents -->
+    <color name="md_theme_light_primary">#006874</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#97F0FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#001F24</color>
+
+    <!-- Surfaces & Backgrounds (Light Mode) -->
+    <color name="md_theme_light_background">#F8FDFF</color>
+    <color name="md_theme_light_surface">#F8FDFF</color>
+    <color name="md_theme_light_surfaceContainer">#E6F4F7</color>
+    <color name="md_theme_light_onSurface">#191C1D</color>
+
+    <!-- Dark Mode Palette -->
+    <color name="md_theme_dark_primary">#4EF2D8</color>
+    <color name="md_theme_dark_onPrimary">#00373E</color>
+    <color name="md_theme_dark_primaryContainer">#004F58</color>
+    <color name="md_theme_dark_onPrimaryContainer">#97F0FF</color>
+
+    <!-- Surfaces & Backgrounds (Dark Mode) -->
+    <color name="md_theme_dark_background">#0F1416</color>
+    <color name="md_theme_dark_surface">#0F1416</color>
+    <color name="md_theme_dark_surfaceContainer">#1C2225</color>
+    <color name="md_theme_dark_onSurface">#DEE3E5</color>
+
+    <!-- Functional States (Active / Inactive Switch Status) -->
+    <color name="status_active_glow">#00E5FF</color>
+    <color name="status_inactive_muted">#5A6065</color>
+
 </resources>
