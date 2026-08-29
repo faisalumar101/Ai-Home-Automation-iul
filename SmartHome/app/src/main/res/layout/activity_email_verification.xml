@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="?android:attr/windowBackground">
+
+    <ImageView
+        android:id="@+id/ivEmailIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:tint="?attr/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tvVerifyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Verify Your Email"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface" />
+
+    <TextView
+        android:id="@+id/tvVerifyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="We've sent a verification link to your email address. Please open your inbox and tap the link to activate your account."
+        android:textSize="15sp"
+        android:textColor="@color/status_inactive_muted" />
+
+    <!-- Button to check if user verified link in email -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIHaveVerified"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:text="I've Verified My Email"
+        android:textSize="16sp"
+        app:cornerRadius="12dp" />
+
+    <!-- Button to resend email -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnResendEmail"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:text="Resend Verification Link"
+        android:textSize="16sp"
+        app:cornerRadius="12dp" />
+
+    <!-- Back to log in Text -->
+    <TextView
+        android:id="@+id/tvBackToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Back to Sign In"
+        android:textSize="14sp"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>
