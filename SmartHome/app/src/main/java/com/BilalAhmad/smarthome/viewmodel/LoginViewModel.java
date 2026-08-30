@@ -62,4 +62,7 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+    public void resetPassword(String email, AuthRepository.SimpleCallback callback) {
+        repository.sendPasswordReset(email, callback);
+    }
 }

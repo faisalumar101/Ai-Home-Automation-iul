@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.BilalAhmad.smarthome.data.repository.AuthRepository;
 import com.BilalAhmad.smarthome.databinding.ActivityLoginBinding;
 import com.BilalAhmad.smarthome.viewmodel.LoginViewModel;
 
@@ -65,6 +66,30 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.tvSignUp.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        });
+
+        binding.tvForgotPassword.setOnClickListener(v->{
+            String email = binding.etEmail.getText().toString().trim();
+            if (email.isEmpty()) {
+                binding.etEmail.setError("Please enter your email first");
+                binding.etEmail.requestFocus();
+                return;
+            }
+            binding.progressBar.setVisibility(View.VISIBLE);
+
+            viewModel.resetPassword(email, new AuthRepository.SimpleCallback() {
+                @Override
+                public void onSuccess() {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(LoginActivity.this, "Password reset link sent to your email!", Toast.LENGTH_LONG).show();
+
+                }
+                @Override
+                public void onFailure(String errorMessage) {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }
