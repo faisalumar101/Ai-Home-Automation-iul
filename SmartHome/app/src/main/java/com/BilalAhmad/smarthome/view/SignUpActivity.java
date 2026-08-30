@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.BilalAhmad.smarthome.databinding.ActivitySignUpBinding;
+import com.BilalAhmad.smarthome.util.UiUtils;
 import com.BilalAhmad.smarthome.viewmodel.SignUpViewModel;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -49,14 +50,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         viewModel.getErrorMessage().observe(this, error -> {
             if (error != null) {
-                Toast.makeText(SignUpActivity.this, error, Toast.LENGTH_LONG).show();
+                UiUtils.showError(binding.getRoot(), error);
             }
         });
 
         viewModel.getIsSignUpSuccess().observe(this, success -> {
             if (Boolean.TRUE.equals(success)) {
-                Toast.makeText(this, "Verification email sent. Please check your inbox.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SignUpActivity.this, EmailVerificationActivity.class));
+                Intent intent = new Intent(SignUpActivity.this, EmailVerificationActivity.class);
+                intent.putExtra("EXTRA_MESSAGE", "Verification email sent, please check your inbox.");
+                startActivity(intent);
                 finish();
             }
         });

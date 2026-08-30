@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.BilalAhmad.smarthome.data.repository.AuthRepository;
 import com.BilalAhmad.smarthome.databinding.ActivityEmailVerificationBinding;
+import com.BilalAhmad.smarthome.util.UiUtils;
 import com.google.firebase.auth.FirebaseUser;
 
 public class EmailVerificationActivity extends AppCompatActivity {
@@ -22,6 +23,11 @@ public class EmailVerificationActivity extends AppCompatActivity {
         binding = ActivityEmailVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getIntent() != null && getIntent().hasExtra("EXTRA_MESSAGE")) {
+            String msg = getIntent().getStringExtra("EXTRA_MESSAGE");
+            UiUtils.showSuccess(binding.getRoot(), msg);
+        }
+
         repository = new AuthRepository();
 
         binding.btnIHaveVerified.setOnClickListener(v -> {
@@ -30,16 +36,18 @@ public class EmailVerificationActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess() {
                     binding.progressBar.setVisibility(View.GONE);
-
-                    Toast.makeText(EmailVerificationActivity.this, "Email verified successfully! please login.", Toast.LENGTH_SHORT).show();
                     repository.logout();
-                    startActivity(new Intent(EmailVerificationActivity.this, LoginActivity.class));
+
+                    Intent intent = new Intent(EmailVerificationActivity.this, LoginActivity.class);
+                    intent.putExtra("EXTRA_MESSAGE", "Account verified! Please login.");
+                    startActivity(intent);
                     finish();
                 }
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    Toast.makeText(EmailVerificationActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    binding.progressBar.setVisibility(View.GONE);
+                    UiUtils.showError(binding.getRoot(), errorMessage);
                 }
             });
         });
@@ -48,12 +56,12 @@ public class EmailVerificationActivity extends AppCompatActivity {
             repository.sendEmailVerification(new AuthRepository.SimpleCallback() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(EmailVerificationActivity.this, "Verification email resent!", Toast.LENGTH_SHORT).show();
+                    UiUtils.showSuccess(binding.getRoot(), "Verification email resent!");
                 }
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    Toast.makeText(EmailVerificationActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    UiUtils.showError(binding.getRoot(), errorMessage);
                 }
             });
         });
@@ -75,7 +83,7 @@ public class EmailVerificationActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    Toast.makeText(EmailVerificationActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    UiUtils.showError(binding.getRoot(), errorMessage);
                 }
             });
         });

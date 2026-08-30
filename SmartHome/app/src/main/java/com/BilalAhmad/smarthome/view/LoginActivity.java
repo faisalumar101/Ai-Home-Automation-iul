@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.BilalAhmad.smarthome.data.repository.AuthRepository;
 import com.BilalAhmad.smarthome.databinding.ActivityLoginBinding;
+import com.BilalAhmad.smarthome.util.UiUtils;
 import com.BilalAhmad.smarthome.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +26,11 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+        if (getIntent() != null && getIntent().hasExtra("EXTRA_MESSAGE")) {
+            String message = getIntent().getStringExtra("EXTRA_MESSAGE");
+            UiUtils.showSuccess(binding.getRoot(), message);
+        }
+
         setupObservers();
         setupClickListeners();
     }
@@ -37,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.getErrorMessage().observe(this, error -> {
             if (error != null) {
-                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
+                UiUtils.showError(binding.getRoot(), error);
             }
         });
 
@@ -50,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.getIsEmailUnverified().observe(this, unverified -> {
             if (Boolean.TRUE.equals(unverified)) {
-                Toast.makeText(this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
+                UiUtils.showInfo(binding.getRoot(), "Please verify your email before logging in.");
                 startActivity(new Intent(LoginActivity.this, EmailVerificationActivity.class));
                 finish();
             }
@@ -81,13 +87,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess() {
                     binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Password reset link sent to your email!", Toast.LENGTH_LONG).show();
-
+                    UiUtils.showSuccess(binding.getRoot(), "Password reset email sent!");
                 }
                 @Override
                 public void onFailure(String errorMessage) {
                     binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    UiUtils.showError(binding.getRoot(), errorMessage);
                 }
             });
         });
