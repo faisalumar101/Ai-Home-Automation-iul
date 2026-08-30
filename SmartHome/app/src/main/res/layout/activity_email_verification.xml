@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:gravity="center"
     android:background="?android:attr/windowBackground">
 
@@ -41,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="24dp"
         android:text="I've Verified My Email"
         android:textSize="16sp"
         app:cornerRadius="12dp" />
@@ -52,17 +52,18 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="24dp"
         android:text="Resend Verification Link"
         android:textSize="16sp"
         app:cornerRadius="12dp" />
 
     <!-- Back to log in Text -->
     <TextView
-        android:id="@+id/tvBackToLogin"
+        android:id="@+id/tvBackToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Back to Sign In"
+        android:text="Back to Sign Up"
         android:textSize="14sp"
         android:textColor="?attr/colorPrimary"
         android:textStyle="bold"
