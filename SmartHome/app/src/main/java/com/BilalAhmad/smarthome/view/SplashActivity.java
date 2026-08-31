@@ -6,7 +6,15 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.TypefaceSpan;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -49,16 +57,16 @@ public class SplashActivity extends AppCompatActivity {
         startSplashAnimation();
 
     }
-    private void startSplashAnimation(){
-        //for both logo and text
-        View logoContainer = binding.llSplashLogoContainer;
 
-        //creating animation
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(logoContainer, View.SCALE_X, 1.0f, 0.7f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(logoContainer, View.SCALE_Y, 1.0f, 0.7f);
-        ObjectAnimator alpha = ObjectAnimator.ofFloat(logoContainer, View.ALPHA, 1.0f, 0.0f);
 
-        //playing each animation simultaneously
+    private void startSplashAnimation() {
+        // Direct container animation
+        View titleContainer = binding.llSplashTitleContainer;
+
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(titleContainer, View.SCALE_X, 1.0f, 0.7f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(titleContainer, View.SCALE_Y, 1.0f, 0.7f);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(titleContainer, View.ALPHA, 1.0f, 0.0f);
+
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(scaleX, scaleY, alpha);
         animatorSet.setStartDelay(1500);
@@ -67,7 +75,6 @@ public class SplashActivity extends AppCompatActivity {
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorSet.start();
 
-        //Opens authentication while splash finishes
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
