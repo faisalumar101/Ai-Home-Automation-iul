@@ -13,6 +13,12 @@
         <item name="colorSurfaceContainer">@color/md_theme_light_surfaceContainer</item>
         <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
     </style>
+    <style name="CustomNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">#E0F2F1</item>
+        <item name="android:width">42dp</item>
+        <item name="android:height">30dp</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="Theme.SmartHome" parent="Base.Theme.SmartHome" />
 </resources>

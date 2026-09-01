@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/nav_analytics"
+        android:icon="@drawable/outline_analytics_24"
+        android:title="Analytics" />
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/icons8_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_automation"
+        android:icon="@drawable/outline_automation_24"
+        android:title="Automation" />
+
 </menu>

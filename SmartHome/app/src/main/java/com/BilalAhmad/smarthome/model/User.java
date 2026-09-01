@@ -8,6 +8,7 @@ public class User {
     private String name;
     private String email;
     private String role; //for admin/user
+    private String homeId;
     private boolean isFirstLogin;
     private Map<String, Boolean> allowedRooms;
 
@@ -50,6 +51,12 @@ public class User {
     }
     public void setRole(String role) {
         this.role = role;
+    }
+    public String getHomeId() {
+        return homeId;
+    }
+    public void setHomeId(String homeId) {
+        this.homeId = homeId;
     }
     public boolean isFirstLogin() {
         return isFirstLogin;

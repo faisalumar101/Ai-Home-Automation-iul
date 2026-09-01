@@ -31,4 +31,10 @@
     <color name="status_active_glow">#00E5FF</color>
     <color name="status_inactive_muted">#5A6065</color>
 
+    <color name="primary_teal">#007A78</color>
+    <color name="bg_light">#F8FAFC</color>
+    <color name="card_bg_light">#F1F5F9</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+
 </resources>
