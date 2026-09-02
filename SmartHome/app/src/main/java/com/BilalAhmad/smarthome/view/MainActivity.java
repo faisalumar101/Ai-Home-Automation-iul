@@ -2,6 +2,7 @@ package com.BilalAhmad.smarthome.view;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Inflate binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setContentView(binding.getRoot());
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         setupBackPressHandler();
+        setupBottomNavigation();
 
         binding.navigationView.setNavigationItemSelectedListener(this);
 
@@ -47,6 +49,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+    }
+    private void setupBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            //Reset all menu item views to normal scale
+            for (int i = 0; i < binding.bottomNavigation.getMenu().size(); i++) {
+                int menuItemId = binding.bottomNavigation.getMenu().getItem(i).getItemId();
+                View itemView = binding.bottomNavigation.findViewById(menuItemId);
+                if (itemView != null) {
+                    itemView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start();
+                }
+            }
+
+            // Pop effect
+            View selectedView = binding.bottomNavigation.findViewById(item.getItemId());
+            if (selectedView != null) {
+                selectedView.animate().scaleX(1.15f).scaleY(1.15f).setDuration(200).start();
+            }
+
+            // Navigation Fragments handling logic
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                // Show Overview
+            } else if (id == R.id.nav_analytics) {
+                // Show Analytics
+            } else if (id == R.id.nav_automation) {
+                // Show Automation
+            }
+
+            return true;
+        });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
