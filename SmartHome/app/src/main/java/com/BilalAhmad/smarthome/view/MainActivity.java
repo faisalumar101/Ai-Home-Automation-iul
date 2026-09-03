@@ -13,14 +13,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.BilalAhmad.smarthome.R;
+import com.BilalAhmad.smarthome.adapter.RoomAdapter;
 import com.BilalAhmad.smarthome.databinding.ActivityMainBinding;
+import com.BilalAhmad.smarthome.model.Room;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityMainBinding binding;
+    private RoomAdapter roomAdapter;
+    private final List<Room> roomList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +49,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         binding.navigationView.setNavigationItemSelectedListener(this);
 
-        // Profile Click -> Open Side Navigation Drawer
+        //drawer open on profile click
         binding.ivUserProfile.setOnClickListener(v -> {
             if (!binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
+        setupRoomsRecyclerView();
+        loadDummyRooms();
 
     }
+
+    private void setupRoomsRecyclerView() {
+        roomAdapter = new RoomAdapter(roomList, room -> {
+            // Room card click par BottomSheet open hoga
+            openRoomBottomSheet(room.getRoomName());
+        });
+
+        binding.rvRooms.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.rvRooms.setAdapter(roomAdapter);
+    }
+
+
+    private void loadDummyRooms() {
+        roomList.clear();
+        roomList.add(new Room("1", "Living Room", "Presence Detected", true, true));
+        roomList.add(new Room("2", "Master Bedroom", "No Presence", false, false));
+        roomList.add(new Room("3", "Kitchen", "Presence Detected", true, true));
+        roomList.add(new Room("4", "Office Room", "No Presence", false, true));
+
+        roomAdapter.notifyDataSetChanged();
+    }
+
+
+    private void openRoomBottomSheet(String roomName) {
+        RoomBottomSheetFragment bottomSheet = new RoomBottomSheetFragment();
+
+        Bundle args = new Bundle();
+        args.putString("ROOM_NAME", roomName);
+        bottomSheet.setArguments(args);
+
+        bottomSheet.show(getSupportFragmentManager(), "RoomBottomSheetTag");
+    }
+
     private void setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             //Reset all menu item views to normal scale
@@ -114,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
 }

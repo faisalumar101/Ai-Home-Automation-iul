@@ -5,12 +5,12 @@
     android:id="@+id/cardRoomContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    app:cardBackgroundColor="#F1F5F9"
-    app:cardCornerRadius="20dp"
+    android:layout_margin="3dp"
+    app:cardBackgroundColor="#DCF7FFFE"
+    app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
-    app:strokeColor="@color/primary_teal"
-    app:strokeWidth="1dp">
+    app:strokeColor="@color/md_theme_dark_primary"
+    app:strokeWidth="1.5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,14 +27,14 @@
             android:layout_alignParentTop="true"
             android:text="Living Room"
             android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:textSize="12sp"
             tools:fontFamily="@font/poppins_semibold" />
 
         <!-- TOP RIGHT: PRESENCE SENSOR INDICATOR -->
         <ImageView
             android:id="@+id/ivPresenceIcon"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/bg_icon_circle"
@@ -52,7 +52,7 @@
             android:layout_marginTop="2dp"
             android:text="Presence Detected"
             android:textColor="@color/primary_teal"
-            android:textSize="11sp"
+            android:textSize="8sp"
             />
 
         <!-- CENTER: MASTER QUICK SWITCH TOGGLE -->
@@ -63,9 +63,9 @@
             android:layout_below="@id/tvRoomStatus"
             android:layout_marginTop="8dp"
             android:checked="true"
-            android:text="Room Master Switch"
+            android:text="Master Switch"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
+            android:textSize="8sp"
             app:useMaterialThemeColors="true" />
 
         <!-- BOTTOM LEFT: ACTIVE APPLIANCES ICONS -->

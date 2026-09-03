@@ -1,7 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- 1. DRAG HANDLE -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_sheet_handle" />
+
+    <!-- 2. ROOM TITLE & MASTER SWITCH -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSheetRoomTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Master Bedroom"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                tools:fontFamily="@font/poppins_semibold" />
+
+            <TextView
+                android:id="@+id/tvSheetActiveDevices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Active Devices"
+                android:textStyle="bold"
+                android:letterSpacing="0.02"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                 />
+        </LinearLayout>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchMasterRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/primary_teal" />
+    </RelativeLayout>
+
+    <!-- 3. POWER METRICS CARD -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="#E6F2F2"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/primary_teal"
+        app:strokeWidth="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/ivPowerIcon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Power Metric"
+                android:src="@android:drawable/ic_lock_idle_charging"
+                app:tint="@color/primary_teal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/ivPowerIcon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Energy Usage"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                   />
+
+                <TextView
+                    android:id="@+id/tvEnergyUsage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="150W / hr"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    tools:fontFamily="@font/poppins_semibold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_status_badge"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Optimal"
+                android:textColor="@color/primary_teal"
+                android:textSize="11sp"
+                tools:fontFamily="@font/poppins_semibold" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 4. HEADER + ADD APPLIANCE BUTTON -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Appliance Controls"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            tools:fontFamily="@font/poppins_semibold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddAppliance"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="+ Add Device"
+            android:textColor="@color/primary_teal"
+            android:textSize="12sp"
+            tools:fontFamily="@font/poppins_semibold" />
+    </RelativeLayout>
+
+    <!-- 5. DYNAMIC RECYCLERVIEW FOR APPLIANCES -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRoomAppliances"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_appliance_card" />
 
 </LinearLayout>
