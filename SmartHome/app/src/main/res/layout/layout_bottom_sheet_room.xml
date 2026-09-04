@@ -60,7 +60,7 @@
             android:layout_centerVertical="true"
             android:checked="true"
             app:thumbTint="@color/white"
-            app:trackTint="@color/primary_teal" />
+            app:trackTint="@color/switch_track_selector" />
     </RelativeLayout>
 
     <!-- 3. POWER METRICS CARD -->
