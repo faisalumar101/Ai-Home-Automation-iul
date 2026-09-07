@@ -65,6 +65,7 @@
                     tools:fontFamily="@font/poppins_semibold" />
 
                 <TextView
+                    android:id="@+id/tvHeaderSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Floor Overview"
@@ -224,6 +225,12 @@
                             tools:fontFamily="@font/poppins_semibold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/navHostContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

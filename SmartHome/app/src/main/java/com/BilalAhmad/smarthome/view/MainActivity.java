@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupRoomsRecyclerView();
         loadDummyRooms();
 
+        binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
     }
 
     private void setupRoomsRecyclerView() {
@@ -112,12 +113,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // Navigation Fragments handling logic
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                // Show Overview
-            } else if (id == R.id.nav_analytics) {
-                // Show Analytics
-            } else if (id == R.id.nav_automation) {
-                // Show Automation
+            if (id == R.id.nav_home){
+                binding.tvHeaderSubtitle.setText("Floor Overview");
+                binding.rvRooms.setVisibility(View.VISIBLE);
+                binding.cardAddRoom.setVisibility(View.VISIBLE);
+                binding.layoutFloorsContainer.setVisibility(View.VISIBLE);
+                binding.navHostContainer.setVisibility(View.GONE);
+
+            }
+            else if (id == R.id.nav_analytics){
+                binding.tvHeaderSubtitle.setText("Analytics Overview");
+                binding.rvRooms.setVisibility(View.GONE);
+                binding.cardAddRoom.setVisibility(View.GONE);
+                binding.layoutFloorsContainer.setVisibility(View.GONE);
+                binding.navHostContainer.setVisibility(View.VISIBLE);
+
+            }
+            else if(id == R.id.nav_automation){
+                binding.tvHeaderSubtitle.setText("Automation Overview");
+                binding.rvRooms.setVisibility(View.GONE);
+                binding.cardAddRoom.setVisibility(View.GONE);
+                binding.layoutFloorsContainer.setVisibility(View.GONE);
+                binding.navHostContainer.setVisibility(View.VISIBLE);
             }
 
             return true;
