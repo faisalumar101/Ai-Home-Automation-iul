@@ -60,6 +60,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadDummyRooms();
 
         binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+
+        binding.cardAddRoom.setOnClickListener(v -> showAddRoomDialog());
+    }
+
+    private void showAddRoomDialog() {
+
+        com.BilalAhmad.smarthome.databinding.LayoutDialogAddRoomBinding dialogBinding =
+                com.BilalAhmad.smarthome.databinding.LayoutDialogAddRoomBinding.inflate(getLayoutInflater());
+
+        com.google.android.material.dialog.MaterialAlertDialogBuilder builder =
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                        .setView(dialogBinding.getRoot());
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        // Dialog background transparent for card corner radius
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+
+        // Cancel Button
+        dialogBinding.btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        // Add Button
+        dialogBinding.btnAdd.setOnClickListener(v -> {
+            String roomName = dialogBinding.etRoomName.getText() != null ?
+                    dialogBinding.etRoomName.getText().toString().trim() : "";
+
+            if (roomName.isEmpty()) {
+                dialogBinding.tilRoomName.setError("Please enter room name");
+                return;
+            }
+
+            // Add to local list
+            Room newRoom = new Room(
+                    String.valueOf(System.currentTimeMillis()),
+                    roomName,
+                    "No Presence",
+                    false,
+                    true
+            );
+
+            roomList.add(newRoom);
+            roomAdapter.notifyItemInserted(roomList.size() - 1);
+            binding.rvRooms.smoothScrollToPosition(roomList.size() - 1);
+
+            Toast.makeText(this, roomName + " Added!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     private void setupRoomsRecyclerView() {
