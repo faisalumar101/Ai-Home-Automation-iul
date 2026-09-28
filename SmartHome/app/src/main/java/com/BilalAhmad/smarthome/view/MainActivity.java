@@ -3,6 +3,8 @@ package com.BilalAhmad.smarthome.view;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -62,8 +64,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
 
         binding.cardAddRoom.setOnClickListener(v -> showAddRoomDialog());
+        binding.btnAddFloor.setOnClickListener(v -> showAddFloorDialog());
+        binding.btnFloor1.setOnClickListener(v-> {
+            Toast.makeText(this, "Switched to F1", Toast.LENGTH_SHORT).show();
+        });
+    }
+    private void showAddFloorDialog() {
+        com.BilalAhmad.smarthome.databinding.LayoutDialogAddFloorBinding dialogBinding =
+                com.BilalAhmad.smarthome.databinding.LayoutDialogAddFloorBinding.inflate(getLayoutInflater());
+
+        com.google.android.material.dialog.MaterialAlertDialogBuilder builder =
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                        .setView(dialogBinding.getRoot());
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+
+        dialogBinding.btnCancelFloor.setOnClickListener(v -> dialog.dismiss());
+
+        dialogBinding.btnAddFloor.setOnClickListener(v -> {
+            String floorTag = dialogBinding.etFloorName.getText() != null ?
+                    dialogBinding.etFloorName.getText().toString().trim() : "";
+
+            if (floorTag.isEmpty()) {
+                dialogBinding.tilFloorName.setError("Enter floor tag");
+                return;
+            }
+
+            // Add dynamic floor button to vertical list safely
+            addFloorTagToLayout(floorTag);
+
+            Toast.makeText(this, "Floor " + floorTag + " Added!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
+    private void addFloorTagToLayout(String floorTag) {
+        TextView tvFloor = new TextView(this);
+
+        int sizeInPx = (int) (36 * getResources().getDisplayMetrics().density);
+        int marginInPx = (int) (8 * getResources().getDisplayMetrics().density);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(sizeInPx, sizeInPx);
+        params.setMargins(0, 0, 0, marginInPx);
+        tvFloor.setLayoutParams(params);
+
+        tvFloor.setText(floorTag);
+        tvFloor.setGravity(android.view.Gravity.CENTER);
+        tvFloor.setTextSize(13);
+
+        // Default Floor Style
+        tvFloor.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+        tvFloor.setBackgroundResource(R.drawable.bg_status_card);
+
+        tvFloor.setOnClickListener(v ->
+                Toast.makeText(this, "Switched to " + floorTag, Toast.LENGTH_SHORT).show()
+        );
+
+        // Dynamic addition at top index 0
+        binding.layoutFloorsList.addView(tvFloor, 0);
+    }
     private void showAddRoomDialog() {
 
         com.BilalAhmad.smarthome.databinding.LayoutDialogAddRoomBinding dialogBinding =
