@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
 
-            // Add dynamic floor button to vertical list safely
+            // Add dynamic floor button to vertical list 
             addFloorTagToLayout(floorTag);
 
             Toast.makeText(this, "Floor " + floorTag + " Added!", Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Switched to " + floorTag, Toast.LENGTH_SHORT).show()
         );
 
-        // Dynamic addition at top index 0
+        // Dynamic addition
         binding.layoutFloorsList.addView(tvFloor, 0);
     }
     private void showAddRoomDialog() {
@@ -140,15 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         androidx.appcompat.app.AlertDialog dialog = builder.create();
 
-        // Dialog background transparent for card corner radius
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
         }
 
-        // Cancel Button
         dialogBinding.btnCancel.setOnClickListener(v -> dialog.dismiss());
 
-        // Add Button
         dialogBinding.btnAdd.setOnClickListener(v -> {
             String roomName = dialogBinding.etRoomName.getText() != null ?
                     dialogBinding.etRoomName.getText().toString().trim() : "";
