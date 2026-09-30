@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadDummyRooms();
 
         binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+        binding.btnMenu.setOnClickListener(v -> showRightPopupMenu(v));
 
         binding.cardAddRoom.setOnClickListener(v -> showAddRoomDialog());
         binding.btnAddFloor.setOnClickListener(v -> showAddFloorDialog());
@@ -128,6 +129,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Dynamic addition
         binding.layoutFloorsList.addView(tvFloor, 0);
+    }
+
+    private void showRightPopupMenu(View view) {
+        androidx.appcompat.widget.PopupMenu popup = new androidx.appcompat.widget.PopupMenu(this, view);
+
+        popup.getMenuInflater().inflate(R.menu.menu_right_settings, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menu_settings) {
+                Toast.makeText(this, "App Settings Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.menu_notifications) {
+                Toast.makeText(this, "Notifications Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
+
+        popup.show();
     }
     private void showAddRoomDialog() {
 
